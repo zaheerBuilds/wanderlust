@@ -1,0 +1,120 @@
+<% layout('layouts/boilerplate') %>
+
+<!-- Form actions point to the base creation endpoint via HTTP POST -->
+<form
+  action="/listings"
+  method="POST"
+  class="row g-3 needs-validation"
+  novalidate
+>
+  <!-- 1. Title Input (Full Width) -->
+  <div class="col-md-12">
+    <label for="title" class="form-label">Title</label>
+    <input
+      type="text"
+      class="form-control"
+      id="title"
+      name="listing[title]"
+      placeholder="Enter a catchy title"
+      required
+    />
+    <div class="valid-feedback">Looks good!</div>
+    <div class="invalid-feedback">Please enter a valid title.</div>
+  </div>
+
+  <!-- 2. Description Textarea (Full Width) -->
+  <div class="col-md-12">
+    <label for="description" class="form-label">Description</label>
+    <textarea
+      class="form-control"
+      id="description"
+      name="listing[description]"
+      rows="4"
+      placeholder="Describe the aesthetic, amenities, and vibe"
+      required
+    ></textarea>
+    <div class="valid-feedback">Looks good!</div>
+    <div class="invalid-feedback">Please provide a short description.</div>
+  </div>
+
+  <!-- 3. Image URL Input (Full Width) - NOT REQUIRED -->
+  <div class="col-md-12">
+    <label for="imageUrl" class="form-label">Image URL</label>
+    <!-- Removed 'required' attribute so users can leave it blank -->
+    <input
+      type="url"
+      class="form-control"
+      id="imageUrl"
+      name="listing[image][url]"
+      placeholder="https://unsplash.com... (Optional)"
+    />
+    <div class="valid-feedback">Optional field - Looks good!</div>
+    <div class="invalid-feedback">
+      Please provide a valid image web link if pasting a URL.
+    </div>
+  </div>
+
+  <!-- 4. Price Input (Half Width) -->
+  <div class="col-md-4">
+    <label for="price" class="form-label">Price per Night</label>
+    <div class="input-group has-validation">
+      <span class="input-group-text" id="currencyPrepend">$</span>
+      <input
+        type="number"
+        class="form-control"
+        id="price"
+        name="listing[price]"
+        aria-describedby="currencyPrepend"
+        placeholder="120"
+        min="0"
+        required
+      />
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">
+        Please enter a valid price (positive numbers only).
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Location Input (Half Width) -->
+  <div class="col-md-4">
+    <label for="location" class="form-label">Location/City</label>
+    <input
+      type="text"
+      class="form-control"
+      id="location"
+      name="listing[location]"
+      placeholder="e.g., Paris, Malibu, Aspen"
+      required
+    />
+    <div class="valid-feedback">Looks good!</div>
+    <div class="invalid-feedback">Please provide a valid location.</div>
+  </div>
+
+  <!-- 6. Country Input (Half Width) -->
+  <div class="col-md-4">
+    <label for="country" class="form-label">Country</label>
+    <input
+      type="text"
+      class="form-control"
+      id="country"
+      name="listing[country]"
+      placeholder="e.g., France, United States"
+      required
+    />
+    <div class="valid-feedback">Looks good!</div>
+    <div class="invalid-feedback">Please provide a valid country.</div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="col-12 mt-4 d-flex gap-2">
+    <button
+      class="btn btn-danger"
+      type="submit"
+      style="background-color: #ff385c; border: none"
+    >
+      Create Listing
+    </button>
+    <a href="/listings" class="btn btn-outline-secondary">Cancel</a>
+  </div>
+</form>

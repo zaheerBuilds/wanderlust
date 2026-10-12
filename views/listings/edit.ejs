@@ -1,0 +1,121 @@
+<% layout('/layouts/boilerplate') %>
+
+<!-- Form method overrides POST to PUT for updates -->
+<form
+  action="/listings/<%= listing._id %>?_method=PATCH"
+  method="POST"
+  class="row g-3 needs-validation"
+  novalidate
+>
+  <!-- 1. Title Input (Full Width) -->
+  <div class="col-md-12">
+    <label for="title" class="form-label">Title</label>
+    <input
+      type="text"
+      class="form-control"
+      id="title"
+      name="listing[title]"
+      value="<%= listing.title %>"
+      required
+    />
+    <div class="valid-feedback">Looks good!</div>
+    <div class="invalid-feedback">Please enter a valid title.</div>
+  </div>
+
+  <!-- 2. Description Textarea (Full Width) -->
+  <div class="col-md-12">
+    <label for="description" class="form-label">Description</label>
+    <textarea
+      class="form-control"
+      id="description"
+      name="listing[description]"
+      rows="4"
+      required
+    >
+<%= listing.description %></textarea
+    >
+    <div class="valid-feedback">Looks good!</div>
+    <div class="invalid-feedback">Please provide a short description.</div>
+  </div>
+
+  <!-- 3. Image URL Input (Full Width) -->
+  <div class="col-md-12">
+    <label for="imageUrl" class="form-label">Image URL</label>
+    <input
+      type="url"
+      class="form-control"
+      id="imageUrl"
+      name="listing[image][url]"
+      value="<%= listing.image.url %>"
+      required
+    />
+    <div class="valid-feedback">Looks good!</div>
+    <div class="invalid-feedback">Please provide a valid image web link.</div>
+  </div>
+
+  <!-- 4. Price Input (Half Width) -->
+  <div class="col-md-4">
+    <label for="price" class="form-label">Price per Night</label>
+    <div class="input-group has-validation">
+      <span class="input-group-text" id="currencyPrepend">$</span>
+      <input
+        type="number"
+        class="form-control"
+        id="price"
+        name="listing[price]"
+        value="<%= listing.price %>"
+        aria-describedby="currencyPrepend"
+        min="0"
+        required
+      />
+      <div class="valid-feedback">Looks good!</div>
+      <div class="invalid-feedback">
+        Please enter a valid price (positive numbers only).
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Location Input (Half Width) -->
+  <div class="col-md-4">
+    <label for="location" class="form-label">Location/City</label>
+    <input
+      type="text"
+      class="form-control"
+      id="location"
+      name="listing[location]"
+      value="<%= listing.location %>"
+      required
+    />
+    <div class="valid-feedback">Looks good!</div>
+    <div class="invalid-feedback">Please provide a valid location.</div>
+  </div>
+
+  <!-- 6. Country Input (Half Width) -->
+  <div class="col-md-4">
+    <label for="country" class="form-label">Country</label>
+    <input
+      type="text"
+      class="form-control"
+      id="country"
+      name="listing[country]"
+      value="<%= listing.country %>"
+      required
+    />
+    <div class="valid-feedback">Looks good!</div>
+    <div class="invalid-feedback">Please provide a valid country.</div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="col-12 mt-4 d-flex gap-2">
+    <button
+      class="btn btn-danger"
+      type="submit"
+      style="background-color: #ff385c; border: none"
+    >
+      Save Changes
+    </button>
+    <a href="/listings/<%= listing._id %>" class="btn btn-outline-secondary"
+      >Cancel</a
+    >
+  </div>
+</form>
