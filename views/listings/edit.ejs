@@ -6,6 +6,7 @@
   method="POST"
   class="row g-3 needs-validation"
   novalidate
+  enctype="multipart/form-data"
 >
   <!-- 1. Title Input (Full Width) -->
   <div class="col-md-12">
@@ -38,14 +39,14 @@
     <div class="invalid-feedback">Please provide a short description.</div>
   </div>
 
-  <!-- 3. Image URL Input (Full Width) -->
+  <!-- 3. Image Upload -->
   <div class="col-md-12">
-    <label for="imageUrl" class="form-label">Image URL</label>
+    <label for="imageUrl" class="form-label">Upload Image</label>
     <input
-      type="url"
+      type="file"
       class="form-control"
       id="imageUrl"
-      name="listing[image][url]"
+      name="listing[image]"
       value="<%= listing.image.url %>"
       required
     />

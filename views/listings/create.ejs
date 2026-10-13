@@ -1,13 +1,12 @@
 <% layout('layouts/boilerplate') %>
 
-<!-- Form actions point to the base creation endpoint via HTTP POST -->
 <form
   action="/listings"
   method="POST"
   class="row g-3 needs-validation"
   novalidate
+  enctype="multipart/form-data"
 >
-  <!-- 1. Title Input (Full Width) -->
   <div class="col-md-12">
     <label for="title" class="form-label">Title</label>
     <input
@@ -22,7 +21,6 @@
     <div class="invalid-feedback">Please enter a valid title.</div>
   </div>
 
-  <!-- 2. Description Textarea (Full Width) -->
   <div class="col-md-12">
     <label for="description" class="form-label">Description</label>
     <textarea
@@ -37,21 +35,15 @@
     <div class="invalid-feedback">Please provide a short description.</div>
   </div>
 
-  <!-- 3. Image URL Input (Full Width) - NOT REQUIRED -->
   <div class="col-md-12">
-    <label for="imageUrl" class="form-label">Image URL</label>
-    <!-- Removed 'required' attribute so users can leave it blank -->
+    <label for="imageUrl" class="form-label">Image Upload </label>
     <input
-      type="url"
+      type="file"
       class="form-control"
       id="imageUrl"
-      name="listing[image][url]"
-      placeholder="https://unsplash.com... (Optional)"
+      name="listing[image]"
+      placeholder="Upload Image"
     />
-    <div class="valid-feedback">Optional field - Looks good!</div>
-    <div class="invalid-feedback">
-      Please provide a valid image web link if pasting a URL.
-    </div>
   </div>
 
   <!-- 4. Price Input (Half Width) -->

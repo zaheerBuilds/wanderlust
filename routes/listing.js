@@ -5,6 +5,9 @@ const { listingSchema } = require("../schema.js");
 
 const Listing = require("../models/listing");
 const { isLoggedIn, isAuthor, validateListing } = require("../middleware");
+const multer = require("multer");
+const { storage } = require("../cloudConfig.js");
+const upload = multer({ storage });
 
 // Show all listings on index route
 router.get(
@@ -29,9 +32,14 @@ router.post(
   "/",
   isLoggedIn,
   validateListing,
+  upload.single("listing[image]"),
   WrapAsync(async (req, res) => {
     let { listing } = req.body;
+    let url = req.file.path;
+    let filename = req.file.filename;
+
     const newListing = new Listing(listing);
+    newListing.image = { filename, url };
     newListing.author = req.user._id;
     await newListing.save();
     res.redirect("/listings");
@@ -84,10 +92,14 @@ router.patch(
   "/:id",
   isLoggedIn,
   isAuthor,
+  upload.single("listing[image]"),
   validateListing,
   WrapAsync(async (req, res) => {
+    let url = req.file.path;
+    let filename = req.file.filename;
     const { id } = req.params;
     const { listing } = req.body;
+    listing.image = { filename, url };
     await Listing.findByIdAndUpdate(id, listing, {
       new: true,
     });
